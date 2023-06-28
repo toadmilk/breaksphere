@@ -11,10 +11,29 @@ datasource db {
     relationMode = "prisma"
 }
 
-model Example {
-    id        String   @id @default(cuid())
+model Post {
+    id String @id @default(uuid())
+    userId String
+    content String
     createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    likes Like[]
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([createdAt, id])
+    @@index([userId])
+}
+
+model Like {
+    userId String
+    postId String
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+    @@id([userId, postId])
+    @@index([userId])
+    @@index([postId])
 }
 
 // Necessary for Next auth
@@ -55,6 +74,12 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+
+    // Non-Next Auth
+    posts         Post[]
+    likes         Like[]
+    followers     User[]    @relation(name: "Followers")
+    following     User[]    @relation(name: "Followers")
 }
 
 model VerificationToken {
