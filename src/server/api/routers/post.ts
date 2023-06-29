@@ -44,7 +44,7 @@ export const postRouter = createTRPCRouter({
         .input(z.object({ content: z.string() }))
         .mutation(async ({ input: { content }, ctx }) => {
         const post = await ctx.prisma.post.create({ data: { content, userId: ctx.session.user.id } });
-        void ctx.revalidateSSG?.(`/profile/${ctx.session.user.id}`);
+        void ctx.revalidateSSG?.(`/profiles/${ctx.session.user.id}`);
         return post;
     }),
     toggleLike: protectedProcedure.input(z.object({ id: z.string() }))
