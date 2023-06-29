@@ -2,7 +2,10 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { signIn, signOut } from 'next-auth/react';
 import {IconHoverEffect} from "~/components/IconHoverEffect";
-import { VscHome, VscAccount, VscSignIn, VscSignOut } from "react-icons/vsc";
+// import { VscHome, VscAccount, VscSignIn, VscSignOut } from "react-icons/vsc";
+import { BsHouseFill, BsBellFill } from "react-icons/bs";
+import { FaUser } from "react-icons/fa";
+import { BiLogIn, BiLogOut } from "react-icons/bi";
 
 export function SideNav() {
     const session = useSession();
@@ -14,8 +17,8 @@ export function SideNav() {
                     <Link href="/">
                         <IconHoverEffect>
                             <span className="flex items-center gap-4">
-                                <VscHome className="h-8 w-8" ></VscHome>
-                                <span className="hidden text-lg md:inline">Home</span>
+                                <BsHouseFill className="h-8 w-8 dark:fill-white" ></BsHouseFill>
+                                <span className="hidden text-lg md:inline dark:text-white">Home</span>
                             </span>
                         </IconHoverEffect>
                     </Link>
@@ -25,8 +28,8 @@ export function SideNav() {
                         <Link href={`/profiles/${user.id}`}>
                             <IconHoverEffect>
                             <span className="flex items-center gap-4">
-                                <VscAccount className="h-8 w-8" ></VscAccount>
-                                <span className="hidden text-lg md:inline">Profile</span>
+                                <FaUser className="h-8 w-8 dark:fill-white" ></FaUser>
+                                <span className="hidden text-lg md:inline dark:text-white">Profile</span>
                             </span>
                         </IconHoverEffect>
                         </Link>
@@ -37,7 +40,7 @@ export function SideNav() {
                         <button onClick={() => void signIn()}>
                             <IconHoverEffect>
                                 <span className="flex items-center gap-4">
-                                    <VscSignIn className="h-8 w-8 fill-green-700" ></VscSignIn>
+                                    <BiLogIn className="h-8 w-8 fill-green-700" ></BiLogIn>
                                     <span className="hidden text-lg text-green-700 md:inline">Log In</span>
                                 </span>
                             </IconHoverEffect>
@@ -48,7 +51,7 @@ export function SideNav() {
                         <button onClick={() => void signOut()}>
                             <IconHoverEffect>
                                 <span className="flex items-center gap-4">
-                                    <VscSignOut className="h-8 w-8 fill-red-700" ></VscSignOut>
+                                    <BiLogOut className="h-8 w-8 fill-red-700" ></BiLogOut>
                                     <span className="hidden text-lg text-red-700 md:inline">Log Out</span>
                                 </span>
                             </IconHoverEffect>

@@ -45,22 +45,22 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
       <Head>
         <title>{`BreakSphere - ${profile.name}`}</title>
       </Head>
-      <header className="sticky top-0 z-10 flex items-center border-b bg-white px-4 py-2">
+      <header className="sticky top-0 z-10 flex items-center border-b dark:border-gray-700 bg-white dark:bg-black px-4 py-2">
         <Link href=".." className="mr-2">
           <IconHoverEffect>
-            <VscArrowLeft className="h-6 w-6" />
+            <VscArrowLeft className="h-6 w-6 dark:fill-white" />
           </IconHoverEffect>
         </Link>
         <ProfileImage src={profile.image} className="flex-shrink-0" />
         <div className="ml-2 flex-grow">
-          <h1 className="text-lg font-bold">{profile.name}</h1>
+          <h1 className="text-lg font-bold dark:text-white">{profile.name}</h1>
           <div className="text-gray-500">
-            {profile.postsCount}{" "}
+            <span className="font-semibold text-black dark:text-white">{profile.postsCount}</span>{" "}
             {getPlural(profile.postsCount, "Post", "Posts")} -{" "}
-            {profile.followersCount}{" "}
+            <span className="font-semibold text-black dark:text-white">{profile.followersCount}</span>{" "}
             {getPlural(profile.followersCount, "Follower", "Followers")} -{" "}
-            {profile.followsCount}{" "}
-            {getPlural(profile.followsCount, "Follow", "Followers")}
+            <span className="font-semibold text-black dark:text-white">{profile.followsCount}</span>{" "}
+            {getPlural(profile.followsCount, "Follow", "Following")}
           </div>
         </div>
         <FollowButton

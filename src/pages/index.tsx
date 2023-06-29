@@ -4,6 +4,7 @@ import {api} from "~/utils/api";
 import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
+import { Theme } from "~/components/Theme";
 
 const TABS = ["Recent", "Following"] as const;
 
@@ -12,13 +13,16 @@ const Home: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<(typeof TABS)[number]>("Recent");
   return (
       <>
-          <header className="sticky top-0 z-10 border-b bg-white pt-2">
-            <h1 className="mb-2 px-4 text-lg font-bold">Home</h1>
+          <header className="sticky top-0 z-10 border-b dark:border-gray-700 bg-white dark:bg-black pt-2">
+            <div className="flex items-center content:start">
+              <h1 className="mb-2 px-4 text-lg dark:text-white font-bold">Home</h1>
+              <Theme />
+            </div>
             {session.status === "authenticated" && (
                 <div className="flex">
                   {TABS.map((tab) => {
                     return <button key={tab}
-                      className={`flex-grow p-2 hover:bg-gray-200 focus-visible:bg-gray-200 ${
+                      className={`flex-grow p-2 hover:bg-gray-200 focus-visible:bg-gray-200 dark:text-white dark:hover:bg-gray-900 dark:focus-visible:bg-gray-900 ${
                         tab === selectedTab
                           ? "border-b-4 border-b-indigo-600 font-bold"
                           : ""

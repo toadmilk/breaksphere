@@ -19,13 +19,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
             content="BreakSphere"
         />
         <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <div className="container mx-auto flex items-start sm:pr-4">
-          <SideNav />
-            <div className="min-h-screen flex-grow border-x">
-                <Component {...pageProps} />
-            </div>
+      </Head>
+      <div className="container mx-auto flex items-start sm:pr-4 dark:bg-black">
+        <SideNav />
+        <div className="min-h-screen flex-grow border-x dark:border-gray-700">
+            <Component {...pageProps} />
         </div>
+      </div>
     </SessionProvider>
   );
 };

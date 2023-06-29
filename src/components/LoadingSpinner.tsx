@@ -1,4 +1,4 @@
-import { VscRefresh } from "react-icons/vsc";
+import { BiRefresh } from "react-icons/bi";
 
 type LoadingSpinnerProps = {
   big?: boolean;
@@ -9,7 +9,7 @@ export function LoadingSpinner({big = false}: LoadingSpinnerProps) {
 
   return (
     <div>
-      <VscRefresh className={`animate-spin ${sizeClasses}`} />
+      <BiRefresh className={`animate-spin dark:fill-white ${sizeClasses}`} />
     </div>
   );
 }

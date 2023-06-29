@@ -107,7 +107,7 @@ likedByMe}
         toggleLike.mutate({id});
     }
 
-    return <li className="flex gap-4 border-b px-4 py-4">
+    return <li className="flex gap-4 border-b dark:border-gray-700 px-4 py-4">
         <Link href={`/profiles/${user.id}`}>
             <ProfileImage src={user.image}/>
         </Link>
@@ -115,13 +115,13 @@ likedByMe}
             <div className="flex gap-1">
                 <Link
                     href={`/profiles/${user.id}`}
-                    className="font-bold hover:underline focus-visible:underline">
+                    className="font-bold hover:underline focus-visible:underline dark:text-white">
                     {user.name}
                 </Link>
                 <span className="text-gray-500"></span>
                 <span className="text-gray-500">{dateTimeFormatter.format(createdAt)}</span>
             </div>
-            <p className="whitespace-pre-wrap">{content}</p>
+            <p className="whitespace-pre-wrap dark:text-white">{content}</p>
             <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount}/>
         </div>
     </li>;
