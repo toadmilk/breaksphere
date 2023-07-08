@@ -24,3 +24,12 @@ To sign in to Breaksphere, you have multiple authentication options available, i
 Choose the authentication method that suits you best and start exploring Breaksphere's vibrant community of musicians!
 
 Please note that additional authentication options may be added in the future based on user feedback and requirements.
+
+## About Me
+
+toadmilk is a breakcore artist who loves chopping breaks.
+
+Connect with toadmilk:
+
+- **Linktree:** Check out my links [Linktree](https://linktr.ee/toadmilk).
+- **Discord:** Join my discord server [https://discord.com/invite/qhVx9FZcUR](https://discord.com/invite/qhVx9FZcUR).
