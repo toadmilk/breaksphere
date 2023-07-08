@@ -7,7 +7,7 @@ await import("./src/env.mjs");
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  images: { domains: ["cdn.discordapp.com"]},
+  images: { domains: ["cdn.discordapp.com", "uploadthing.com", "lh3.googleusercontent.com"]},
 
   /**
    * If you have `experimental: { appDir: true }` set, then you must comment the below `i18n` config
@@ -18,6 +18,9 @@ const config = {
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
+  },
+  experimental: {
+    esmExternals: false, // THIS IS THE FLAG THAT MATTERS
   },
 };
 

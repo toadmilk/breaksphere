@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import {type ReactNode} from 'react';
 
 type IconHoverEffectProps = {
     children: ReactNode;
@@ -8,8 +8,8 @@ type IconHoverEffectProps = {
 export function IconHoverEffect({ children, red = false}: IconHoverEffectProps) {
     const colorClasses = red
         ? "outline-red-400 hover:bg-red-200 group-hover-bg-red-200 group-focus-visible:bg-red-200 focus-visible:bg-red-200"
-        : "outline-gray-400 hover:bg-gray-200 group-hover:bg-gray-200 group-focus-visible:bg-gray-200 focus-visible:bg-gray-200" +
-      "dark:outline-gray-900 dark:hover:bg-gray-800 dark:group-hover:bg-gray-800 dark:group-focus-visible:bg-gray-800 dark:focus-visible:bg-gray-800";
+        : "outline-neutral-400 hover:bg-neutral-200 group-hover:bg-neutral-200 group-focus-visible:bg-neutral-200 focus-visible:bg-neutral-200" +
+      "dark:outline-neutral-900 dark:hover:bg-neutral-800 dark:group-hover:bg-neutral-800 dark:group-focus-visible:bg-neutral-800 dark:focus-visible:bg-neutral-800";
 
     return (
         <div

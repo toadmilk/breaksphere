@@ -78,7 +78,7 @@ function Form() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2 border-b dark:border-gray-700 px-4 py-2">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 border-b dark:border-neutral-700 px-4 py-2">
             <div className="flex gap-4">
                 <ProfileImage src={session.data.user.image} />
                 <textarea
@@ -93,7 +93,7 @@ function Form() {
             <div className="flex items-center self-end">
                 <p className="dark:text-white px-2">{varCount}/192</p>
                 <Button className={`${
-                  varCount > 192 ? "text-gray-500" : ""
+                  varCount > 192 ? "text-neutral-500" : ""
                 } ${varCount > 192 ? "opacity-50 cursor-not-allowed" : ""}`}>
                     Post
                 </Button>

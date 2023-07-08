@@ -3,9 +3,10 @@ import { useSession } from 'next-auth/react';
 import { signIn, signOut } from 'next-auth/react';
 import {IconHoverEffect} from "~/components/IconHoverEffect";
 // import { VscHome, VscAccount, VscSignIn, VscSignOut } from "react-icons/vsc";
-import { BsHouseFill, BsBellFill } from "react-icons/bs";
+import { BsHouseFill } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
-import { BiLogIn, BiLogOut } from "react-icons/bi";
+import { BiLogIn, BiLogOut } from "react-icons/bi"; // BiCog
+//import Image from "next/image";
 
 export function SideNav() {
     const session = useSession();
@@ -35,6 +36,30 @@ export function SideNav() {
                         </Link>
                     </li>
                 )}
+                {/*{user != null && (*/}
+                {/*  <li>*/}
+                {/*      <Link href={`/notifications`}>*/}
+                {/*          <IconHoverEffect>*/}
+                {/*            <span className="flex items-center gap-4">*/}
+                {/*                <BsBellFill className="h-8 w-8 dark:fill-white" ></BsBellFill>*/}
+                {/*                <span className="hidden text-lg md:inline dark:text-white">Notifications</span>*/}
+                {/*            </span>*/}
+                {/*          </IconHoverEffect>*/}
+                {/*      </Link>*/}
+                {/*  </li>*/}
+                {/*)}*/}
+                {/*{user != null && (*/}
+                {/*  <li>*/}
+                {/*      <Link href={`/settings`}>*/}
+                {/*          <IconHoverEffect>*/}
+                {/*            <span className="flex items-center gap-4">*/}
+                {/*                <BiCog className="h-8 w-8 dark:fill-white" ></BiCog>*/}
+                {/*                <span className="hidden text-lg md:inline dark:text-white">Settings</span>*/}
+                {/*            </span>*/}
+                {/*          </IconHoverEffect>*/}
+                {/*      </Link>*/}
+                {/*  </li>*/}
+                {/*)}*/}
                 {user == null ?
                     <li>
                         <button onClick={() => void signIn()}>

@@ -1,12 +1,14 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import {ProfileImage} from "~/components/ProfileImage";
+import { ProfileImage } from "~/components/ProfileImage";
 import Link from "next/link";
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { VscHeart, VscHeartFilled } from "react-icons/vsc";
-import {IconHoverEffect} from "~/components/IconHoverEffect";
-import {api} from "~/utils/api";
+import { IconHoverEffect } from "~/components/IconHoverEffect";
+import { api } from "~/utils/api";
 import { LoadingSpinner } from "~/components/LoadingSpinner";
-
+import { BsTrashFill } from "react-icons/bs";
+import { ConfirmModal } from "~/components/ConfirmModal";
+import { useState } from "react";
 
 type Post = {
     id: string,
@@ -40,7 +42,7 @@ export function InfinitePostList({
     if (isError) return <h1>Error...</h1>
 
     if (posts == null || posts.length === 0) {
-        return <h2 className="my-4 text-center text-2x1 text-gray-500">No Posts</h2>
+        return <h2 className="my-4 text-center text-2x1 text-neutral-500">No Posts</h2>
     }
 
     return (
@@ -64,13 +66,13 @@ const dateTimeFormatter = new Intl.DateTimeFormat(undefined, {
 });
 
 function PostCard({
-id,
-user,
-content,
-createdAt,
-likeCount,
-likedByMe}
-: Post) {
+    id,
+    user,
+    content,
+    createdAt,
+    likeCount,
+    likedByMe,
+}: Post) {
     const trpcUtils = api.useContext();
     const toggleLike = api.post.toggleLike.useMutation({ onSuccess: ({
         addedLike}) => {
@@ -107,7 +109,53 @@ likedByMe}
         toggleLike.mutate({id});
     }
 
-    return <li className="flex gap-4 border-b dark:border-gray-700 px-4 py-4">
+    const deletePost = api.post.delete.useMutation({
+        onSuccess: () => {
+            const updateData: Parameters<typeof trpcUtils.post.infiniteFeed.setInfiniteData>[1] = (oldData) => {
+                if (oldData == null) return;
+
+                return {
+                    ...oldData,
+                    pages: oldData.pages.map(page => {
+                        return {
+                            ...page,
+                            posts: page.posts.filter(post => post.id !== id),
+                        }
+                    })
+                }
+            }
+            trpcUtils.post.infiniteFeed.setInfiniteData({}, updateData);
+            trpcUtils.post.infiniteFeed.setInfiniteData({ onlyFollowing: true }, updateData);
+            trpcUtils.post.infiniteProfileFeed.setInfiniteData({ userId: user.id }, updateData);
+        }
+    });
+
+    const session = useSession();
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+    function openDeleteModal() {
+        setIsDeleteModalOpen(true);
+    }
+
+    function closeDeleteModal() {
+        setIsDeleteModalOpen(false);
+    }
+
+    function handleDeletePost() {
+        if (session.data?.user.id != user.id) {
+            return;
+        }
+        deletePost.mutate({id});
+    }
+
+    return (
+      <li className="flex gap-4 border-b dark:border-neutral-700 px-4 py-4">
+        <ConfirmModal
+          isOpen={isDeleteModalOpen}
+          content="Are you sure you want to delete this post?"
+          onCancel={closeDeleteModal}
+          onConfirm={handleDeletePost}
+        />
         <Link href={`/profiles/${user.id}`}>
             <ProfileImage src={user.image}/>
         </Link>
@@ -118,13 +166,17 @@ likedByMe}
                     className="font-bold hover:underline focus-visible:underline dark:text-white">
                     {user.name}
                 </Link>
-                <span className="text-gray-500"></span>
-                <span className="text-gray-500">{dateTimeFormatter.format(createdAt)}</span>
+                {/*<span className="text-neutral-500">@{user.id} · </span> TODO: add this back when users can change their ids*/}
+                <span className="text-neutral-500">{dateTimeFormatter.format(createdAt)}</span>
             </div>
             <p className="whitespace-pre-wrap dark:text-white">{content}</p>
-            <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount}/>
+            <div className="flex">
+                <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount}/>
+                <DeleteButton onClick={openDeleteModal} postOwnerId={user.id} />
+            </div>
         </div>
-    </li>;
+      </li>
+    )
 }
 
 type HeartButtonProps = {
@@ -144,7 +196,7 @@ function HeartButton({
     const HeartIcon = likedByMe ? VscHeartFilled : VscHeart;
 
     if(session.status !== "authenticated") {
-        return (<div className="mb-1 mt-1 flex items-center gap-3 self-start text-gray-500">
+        return (<div className="mb-1 mt-1 flex items-center gap-3 self-start text-neutral-500">
             <HeartIcon />
             <span>{likeCount}</span>
         </div>)
@@ -156,18 +208,42 @@ function HeartButton({
             className={`group -ml-2 items-center gap-1 self-start flex transition-colors duration-200 ${
                 likedByMe 
                     ? "text-red-500" 
-                    : "text-gray-500 hover:text-red-500 focus-visible:text-red-500"
+                    : "text-neutral-500 hover:text-red-500 focus-visible:text-red-500"
             }`}
         >
             <IconHoverEffect red>
-                <HeartIcon className={`transition-colors duration-200 ${
+                <HeartIcon className={`w-5 h-5 transition-colors duration-200 ${
                     likedByMe 
                         ? "fill-red-500" 
-                        : "fill-gray-500 group-hover:fill-red-500 group-focus-visible:fill-red-500"
+                        : "fill-neutral-500 group-hover:fill-red-500 group-focus-visible:fill-red-500"
                 }`}
                 />
             </IconHoverEffect>
         <span>{likeCount}</span>
         </button>
+    )
+}
+
+type DeleteButtonProps = {
+    onClick: () => void;
+    postOwnerId: string;
+}
+
+function DeleteButton({
+    onClick,
+    postOwnerId,
+}: DeleteButtonProps) {
+    const session = useSession();
+
+    if(session.status !== "authenticated" || session.data.user.id !== postOwnerId) {
+        return null;
+    }
+
+    return (
+      <button onClick={onClick} className="ml-3">
+      <IconHoverEffect red>
+        <BsTrashFill className="self-center w-5 h-5 transition-colors duration-100 fill-neutral-500 hover:fill-red-500 focus-visible:fill-red-500" />
+      </IconHoverEffect>
+      </button>
     )
 }

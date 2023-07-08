@@ -14,7 +14,7 @@ export const postRouter = createTRPCRouter({
           limit: z.number().optional(),
           cursor: z.object({ id: z.string(), createdAt: z.date() }).optional(),
       })
-    ).query(async ({ input: { limit = 25, userId, cursor }, ctx }) => {
+    ).query(async ({ input: { limit = 10, userId, cursor }, ctx }) => {
         return await getInfinitePosts({
             limit,
             ctx,
@@ -28,7 +28,7 @@ export const postRouter = createTRPCRouter({
             limit: z.number().optional(),
             cursor: z.object({ id: z.string(), createdAt: z.date() }).optional(),
         })
-    ).query(async ({ input: { limit = 25, onlyFollowing = false, cursor }, ctx }) => {
+    ).query(async ({ input: { limit = 10, onlyFollowing = false, cursor }, ctx }) => {
         const currentUserId = ctx.session?.user.id;
         return await getInfinitePosts({
             limit, ctx, cursor, whereClause: currentUserId == null || !onlyFollowing ? undefined : {
@@ -44,6 +44,15 @@ export const postRouter = createTRPCRouter({
         .input(z.object({ content: z.string() }))
         .mutation(async ({ input: { content }, ctx }) => {
         const post = await ctx.prisma.post.create({ data: { content, userId: ctx.session.user.id } });
+        void ctx.revalidateSSG?.(`/profiles/${ctx.session.user.id}`);
+        return post;
+    }),
+    delete: protectedProcedure
+        .input(z.object({ id: z.string() }))
+        .mutation(async ({ input: { id }, ctx }) => {
+        const post = await ctx.prisma.post.delete({
+            where: { id },
+        });
         void ctx.revalidateSSG?.(`/profiles/${ctx.session.user.id}`);
         return post;
     }),
@@ -65,8 +74,8 @@ export const postRouter = createTRPCRouter({
 });
 
 async function getInfinitePosts({
-  whereClause,
-  ctx,
+    whereClause,
+    ctx,
     limit,
     cursor,
 }: {

@@ -32,7 +32,7 @@ export function Theme() {
   }
 
   return (
-    <div>
+    <div className="">
       <button onClick={toggleTheme}>
         {theme === 'light' ? (
           <BsFillMoonFill className="fill-black w-7 h-7" />

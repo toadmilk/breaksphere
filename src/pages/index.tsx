@@ -13,8 +13,8 @@ const Home: NextPage = () => {
   const [selectedTab, setSelectedTab] = useState<(typeof TABS)[number]>("Recent");
   return (
       <>
-          <header className="sticky top-0 z-10 border-b dark:border-gray-700 bg-white dark:bg-black pt-2">
-            <div className="flex items-center content:start">
+          <header className="sticky top-0 z-10 border-b dark:border-neutral-700 bg-white dark:bg-black pt-2">
+            <div className="flex">
               <h1 className="mb-2 px-4 text-lg dark:text-white font-bold">Home</h1>
               <Theme />
             </div>
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
                 <div className="flex">
                   {TABS.map((tab) => {
                     return <button key={tab}
-                      className={`flex-grow p-2 hover:bg-gray-200 focus-visible:bg-gray-200 dark:text-white dark:hover:bg-gray-900 dark:focus-visible:bg-gray-900 ${
+                      className={`flex-grow p-2 hover:bg-neutral-200 focus-visible:bg-neutral-200 dark:text-white dark:hover:bg-neutral-900 dark:focus-visible:bg-neutral-900 ${
                         tab === selectedTab
                           ? "border-b-4 border-b-indigo-600 font-bold"
                           : ""
