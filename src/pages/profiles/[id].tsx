@@ -43,6 +43,8 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
   const toggleFollow = toggleFollowFunc(id);
 
+
+
   return (
     <>
       {isEditProfileModalOpen && (

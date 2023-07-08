@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "~/components/Button";
 import { ProfileImage } from "~/components/ProfileImage";
 import { api } from "~/utils/api";
 import Uploader from "~/components/Uploader";
 import { AiOutlineClose } from "react-icons/ai";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface Profile {
   name: string;
-  bio: string | null;
-  location: string | null;
-  website: string | null;
+  bio: string;
+  location: string;
+  website: string;
   image: string;
 }
 
@@ -29,7 +29,7 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
     bio: profile.bio || '',
     location: profile.location || '',
     website: profile.website || '',
-    image: '',
+    image: profile.image || '',
   });
 
   const handleCloseOnOverlay = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {

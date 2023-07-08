@@ -22,12 +22,12 @@ export const profileRouter = createTRPCRouter({
         if (profile == null) return;
 
         return {
-            name: profile.name,
-            image: profile.image,
+            name: profile.name ?? "",
+            image: profile.image ?? "",
             id: profile.id,
-            bio: profile.bio,
-            location: profile.location,
-            website: profile.website,
+            bio: profile.bio ?? "",
+            location: profile.location ?? "",
+            website: profile.website ?? "",
             followersCount: profile._count.followers,
             followsCount: profile._count.following,
             postsCount: profile._count.posts,
