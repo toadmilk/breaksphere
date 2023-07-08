@@ -29,7 +29,7 @@ Please note that additional authentication options may be added in the future ba
 
 toadmilk is a breakcore artist who loves chopping breaks.
 
-Connect with toadmilk:
+Connect with me:
 
 - **Linktree:** Check out my links [Linktree](https://linktr.ee/toadmilk).
 - **Discord:** Join my discord server [https://discord.com/invite/qhVx9FZcUR](https://discord.com/invite/qhVx9FZcUR).
