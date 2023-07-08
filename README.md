@@ -17,9 +17,9 @@ Breaksphere is deployed on [Vercel](https://vercel.com/) and can be accessed at 
 
 To sign in to Breaksphere, you have multiple authentication options available, including:
 
-- Discord: Sign in with your Discord account to access Breaksphere and connect with other musicians.
-- Google: Sign in using your Google account to streamline the authentication process and access Breaksphere seamlessly.
-- GitHub: If you prefer, you can also sign in with your GitHub account to collaborate with fellow musicians on Breaksphere.
+- Discord
+- Google
+- GitHub
 
 Choose the authentication method that suits you best and start exploring Breaksphere's vibrant community of musicians!
 
