@@ -1,28 +1,11 @@
-# Create T3 App
+# Breaksphere
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Breaksphere is a Twitter-like platform designed specifically for musicians by musicians. It provides a space for musicians to connect, share their work, and collaborate with others in the industry. This project is built using the T3 Stack, which combines several powerful technologies to create a robust and efficient application.
 
-## What's next? How do I make an app with this?
+## Technologies Used
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
-
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
-
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
-
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- Next.js: Next.js is a React framework that enables server-side rendering and provides an excellent developer experience.
+- NextAuth.js: NextAuth.js is an authentication library for Next.js applications, offering various authentication strategies out of the box.
+- Prisma: Prisma is an ORM (Object-Relational Mapping) tool that simplifies database access and management.
+- Tailwind CSS: Tailwind CSS is a utility-first CSS framework that allows you to rapidly build custom user interfaces.
+- tRPC: tRPC is a TypeScript-first framework for building efficient and type-safe APIs.
