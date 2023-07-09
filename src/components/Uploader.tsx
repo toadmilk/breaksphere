@@ -11,14 +11,10 @@ export default function Uploader() {
       <UploadButton
         endpoint="profilePicture"
         onClientUploadComplete={(res) => {
-          toast.success('Profile picture updated successfully! 😄', {
-            position: 'bottom-right',
-          });
+          toast.success('Profile picture updated successfully! 😄');
         }}
         onUploadError={(error: Error) => {
-          toast.error(error.message + " 😭", {
-            position: 'bottom-right',
-          });
+          toast.error(error.message + " 😭");
         }}
       />
     </main>

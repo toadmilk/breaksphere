@@ -52,21 +52,17 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
     e.preventDefault();
     if (formValues.name !== profile.name || formValues.bio !== profile.bio || formValues.location !== profile.location || formValues.website !== profile.website) {
       editProfile.mutate(formValues);
-      toast.success('Profile updated successfully! 😄', {
-        position: 'bottom-right',
-      });
+      toast.success('Profile updated successfully! 😄');
     } else {
-      toast.info('No changes made to profile. 💀', {
-        position: 'bottom-right',
-      });
+      toast.info('No changes made to profile. 💀');
     }
     onClose();
   }
 
   return isOpen ? (
-    <div className={'modal fixed inset-0 flex justify-center z-50 dark:text-white py-2 '}>
-      <div ref={outsideRef} className={'modal__overlay dark:bg-black'} onClick={handleCloseOnOverlay} />
-      <div className="max-w-md bg-white dark:bg-black rounded-lg shadow-xl w-full overflow-y-auto">
+    <div className={'fixed inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-50 dark:text-white py-2'}>
+      <div ref={outsideRef} className={'modal__overlay'} onClick={handleCloseOnOverlay} />
+      <div className="max-w-md bg-white dark:bg-neutral-900 rounded-lg shadow-xl w-full h-[700px] overflow-y-auto">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between p-4 border-b">
             <h3 className="text-xl font-semibold dark:text-white">{title}</h3>
@@ -83,7 +79,7 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
             <div className="mb-4">
               <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-white">Name</label>
               <input
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-black"
+                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-neutral-900"
                 type="text"
                 name="name"
                 placeholder="Enter your name"
@@ -94,7 +90,7 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
             <div className="mb-4">
               <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-white">Bio</label>
               <textarea
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-black"
+                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-neutral-900"
                 name="bio"
                 placeholder="Enter your bio"
                 rows={4}
@@ -105,7 +101,7 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
             <div className="mb-4">
               <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-white">Location</label>
               <input
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-black"
+                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-neutral-900"
                 type="text"
                 name="location"
                 placeholder="Enter your location"
@@ -116,7 +112,7 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
             <div className="mb-4">
               <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-white">Website</label>
               <input
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-black"
+                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-neutral-900"
                 type="text"
                 name="website"
                 placeholder="Enter your website"

@@ -17,7 +17,7 @@ import { Button } from "~/components/Button";
 import { useSession } from "next-auth/react";
 import { FaLocationDot } from "react-icons/fa6";
 import { BsGlobe } from "react-icons/bs";
-import { FollowBarModal } from "~/components/FollowBarModal";
+import { FollowBarModal } from "~/components/FollowBar";
 
 const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
   {
@@ -47,9 +47,6 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
   return (
     <>
-      {isEditProfileModalOpen && (
-        <div className="fixed inset-0 bg-gray-500 opacity-50 z-30"></div>
-      )}
       <FollowBarModal title={'Followers'} isOpen={isFollowersModalOpen} onClose={toggleFollowersModal} id={id} />
       <FollowBarModal title={'Following'} isOpen={isFollowingModalOpen} onClose={toggleFollowingModal} id={id} />
       <EditProfileModal title={'Edit Profile'} isOpen={isEditProfileModalOpen} onClose={toggleEditProfileModal} profile={profile} />

@@ -4,19 +4,24 @@ import {api} from "~/utils/api";
 import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { Theme } from "~/components/Theme";
+import { ThemeButton } from "~/components/ThemeButton";
 
 const TABS = ["Recent", "Following"] as const;
 
-const Home: NextPage = () => {
+type ThemeProps = {
+  theme: string;
+  toggleTheme: () => void;
+}
+
+const Home: NextPage<ThemeProps> = ({ theme, toggleTheme }) => {
   const session = useSession();
   const [selectedTab, setSelectedTab] = useState<(typeof TABS)[number]>("Recent");
   return (
       <>
           <header className="sticky top-0 z-10 border-b dark:border-neutral-700 bg-white dark:bg-black pt-2">
             <div className="flex">
-              <h1 className="mb-2 px-4 text-lg dark:text-white font-bold">Home</h1>
-              <Theme />
+              <h1 className="mb-2 px-4 pt-1 text-lg dark:text-white font-bold">Home</h1>
+              <ThemeButton theme={theme} toggleTheme={toggleTheme} />
             </div>
             {session.status === "authenticated" && (
                 <div className="flex">

@@ -3,6 +3,8 @@ import { ProfileImage } from "~/components/ProfileImage";
 import FollowButton from "~/components/FollowButton";
 import { toggleFollowFunc } from "~/utils/toggleFollowFunc";
 import Link from "next/link";
+import React from "react";
+import { AiOutlineClose } from "react-icons/ai";
 
 function userCard(
   user: {
@@ -41,10 +43,10 @@ function userCard(
 type FollowBarProps = {
   id: string;
   title: string;
-  modal?: boolean;
 }
 
-export function FollowBar({ id, title, modal = false }: FollowBarProps) {
+export function FollowBar({ id, title, }: FollowBarProps) {
+  if (id == null) return null;
   const profiles = api.profile.getFollowers.useQuery({ id, title });
 
   return (
@@ -58,15 +60,58 @@ export function FollowBar({ id, title, modal = false }: FollowBarProps) {
             })}
           </div>
         </div>
-      ) : (
-        modal && (
-          <h1 className="text-2xl font-bold dark:text-white mt-4">
-            {title === "Followers"
-              ? "No Followers :("
-              : "You aren't following anyone"}
-          </h1>
-        )
-      )}
+      ) : null }
     </div>
   );
 }
+
+interface ModalProps {
+  id: string;
+  title: string;
+  isOpen: boolean;
+  onClose: () => void;
+}
+export const FollowBarModal: React.FC<ModalProps> = ({ id, title, isOpen, onClose }) => {
+  const outsideRef = React.useRef(null);
+  const profiles = api.profile.getFollowers.useQuery({ id, title });
+
+  const handleCloseOnOverlay = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    if (e.target === outsideRef.current) {
+      onClose();
+    }
+  }
+
+  return isOpen ? (
+    <div className={'fixed inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-50 dark:text-white py-2'}>
+      <div ref={outsideRef} className={'modal__overlay dark:bg-black'} onClick={handleCloseOnOverlay} />
+      <div
+        className="max-w-md rounded-lg shadow-xl w-full overflow-y-auto"
+        style={{ maxHeight: profiles.data ? 2 * 48 + 600 : 600 }} //Totally non scuffed dynamic rendering
+      >
+      <div className="px-6 py-4 bg-neutral-300 dark:bg-neutral-800 rounded-xl hidden lg:block">
+        <div className="flex items-center justify-end">
+          <button onClick={onClose}>
+            <AiOutlineClose className="w-6 h-6" />
+          </button>
+        </div>
+          {profiles.data && profiles.data.length > 0 ? (
+            <div>
+              <h2 className="dark:text-white text-xl font-semibold">{title}</h2>
+              <div className="flex flex-col gap-6 mt-4">
+                {profiles.data.map((user) => {
+                  return userCard(user, id);
+                })}
+              </div>
+            </div>
+          ) : (
+            <h1 className="dark:text-white text-xl font-semibold">
+              {title === "Followers"
+                ? "No Followers :("
+                : "You aren't following anyone. Check out Who to Follow!"}
+            </h1>
+          )}
+        </div>
+      </div>
+    </div>
+  ) : null;
+};
