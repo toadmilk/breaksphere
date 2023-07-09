@@ -7,13 +7,8 @@ import Head from "next/head";
 import {SideNav} from "~/components/SideNav";
 import { FollowBar } from "~/components/FollowBar";
 import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
-
-type ThemeProps = {
-  theme: string;
-  toggleTheme: () => void;
-}
-
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
@@ -43,11 +38,16 @@ const MyApp: AppType<{ session: Session | null }> = ({
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
-    toast.info(`Switched to ${newTheme} mode!`);
+    toast.info(`Switched to ${newTheme} mode! ${newTheme === 'dark' ? '🌙' : '☀️'}`);
   }
 
   return (
     <SessionProvider session={session}>
+      <ToastContainer
+        position="bottom-right"
+        pauseOnFocusLoss={false}
+        theme={theme === 'light' ? 'light' : 'dark'}
+      />
       <div className="dark:bg-black">
         <Head>
           <title>BreakSphere</title>
@@ -67,11 +67,6 @@ const MyApp: AppType<{ session: Session | null }> = ({
             title="Who to follow"
           />
         </div>
-        <ToastContainer
-          position="bottom-right"
-          pauseOnFocusLoss={false}
-          theme={theme === 'light' ? 'light' : 'dark'}
-        />
       </div>
     </SessionProvider>
   );

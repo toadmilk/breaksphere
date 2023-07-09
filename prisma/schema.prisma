@@ -17,6 +17,7 @@ model Post {
   content   String
   createdAt DateTime @default(now())
   likes     Like[]
+  file      String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -68,13 +69,13 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
+  name          String?   @db.VarChar(50)
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  bio           String?   @db.VarChar(160)
-  location      String?   @db.VarChar(60)
-  website       String?   @db.VarChar(30)
+  bio           String?   @db.VarChar(200)
+  location      String?   @db.VarChar(50)
+  website       String?   @db.VarChar(60)
   accounts      Account[]
   sessions      Session[]
 

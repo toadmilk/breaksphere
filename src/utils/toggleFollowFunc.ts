@@ -16,6 +16,9 @@ export const toggleFollowFunc = (id: string) => {
         }
       })
       toast.success(addedFollow ? "Followed 😄" : "Unfollowed 💀")
+    },
+    onError: (err) => {
+      toast.error(err.message + " 💀")
     }
   });
 }

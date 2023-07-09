@@ -76,7 +76,7 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
           </Button>
         )}
         <div className="col-start-3">
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start break-all">
             {profile.bio ? (
               <span className="dark:text-white pb-2">{profile.bio}</span>
             ) : null}

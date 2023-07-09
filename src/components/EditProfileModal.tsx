@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { Button } from "~/components/Button";
 import { ProfileImage } from "~/components/ProfileImage";
 import { api } from "~/utils/api";
@@ -32,6 +32,14 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
     image: profile.image || '',
   });
 
+  const [varCounts, setVarCounts] = React.useState({
+    name: formValues.name.length,
+    bio: formValues.bio.length,
+    location: formValues.location.length,
+    website: formValues.website.length,
+    image: 0,
+  });
+
   const handleCloseOnOverlay = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (e.target === outsideRef.current) {
       onClose();
@@ -40,19 +48,50 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormValues(prevValues => ({
+    setFormValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
+    setVarCounts((prevCounts) => ({
+      ...prevCounts,
+      [name]: value.length,
+    }));
   };
 
-  const editProfile = api.profile.editProfile.useMutation();
+  useEffect(() => {
+    setVarCounts({
+      name: formValues.name.length,
+      bio: formValues.bio.length,
+      location: formValues.location.length,
+      website: formValues.website.length,
+      image: 0,
+    });
+  }, [formValues]);
+
+  const renderCharCount = (fieldName: keyof Profile, max: number) => {
+    const charCount = varCounts[fieldName];
+    const isOverLimit = charCount > max;
+
+    return (
+      <p className={`text-neutral-500 dark:text-neutral-300 mt-1`}>
+        {charCount}/{max}
+      </p>
+    );
+  };
+
+  const editProfile = api.profile.editProfile.useMutation({
+    onSuccess: () => {
+      toast.success('Profile updated successfully! 😄');
+    },
+    onError: (error) => {
+      toast.error(error.message + " 💀");
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formValues.name !== profile.name || formValues.bio !== profile.bio || formValues.location !== profile.location || formValues.website !== profile.website) {
       editProfile.mutate(formValues);
-      toast.success('Profile updated successfully! 😄');
     } else {
       toast.info('No changes made to profile 💀');
     }
@@ -82,10 +121,13 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-neutral-900"
                 type="text"
                 name="name"
+                id="name"
                 placeholder="Enter your name"
+                maxLength={50}
                 value={formValues.name}
                 onChange={handleChange}
               />
+              {renderCharCount("name", 50)}
             </div>
             <div className="mb-4">
               <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-white">Bio</label>
@@ -93,10 +135,12 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-neutral-900"
                 name="bio"
                 placeholder="Enter your bio"
+                maxLength={200}
                 rows={4}
-                value={formValues.bio !== null ? formValues.bio : ''}
+                value={formValues.bio}
                 onChange={handleChange}
               ></textarea>
+              {renderCharCount("bio", 200)}
             </div>
             <div className="mb-4">
               <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-white">Location</label>
@@ -104,10 +148,12 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-neutral-900"
                 type="text"
                 name="location"
+                maxLength={50}
                 placeholder="Enter your location"
-                value={formValues.location !== null ? formValues.location : ''}
+                value={formValues.location}
                 onChange={handleChange}
               />
+              {renderCharCount("location", 50)}
             </div>
             <div className="mb-4">
               <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-white">Website</label>
@@ -116,9 +162,11 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
                 type="text"
                 name="website"
                 placeholder="Enter your website"
-                value={formValues.website !== null ? formValues.website : ''}
+                maxLength={60}
+                value={formValues.website}
                 onChange={handleChange}
               />
+              {renderCharCount("website", 60)}
             </div>
             <div className="flex justify-end">
               <Button type="submit">Save</Button>

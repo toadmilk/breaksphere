@@ -96,10 +96,10 @@ function Form() {
                 />
             </div>
             <div className="flex items-center self-end">
-                <p className="dark:text-white px-2">{varCount}/192</p>
+                <p className="dark:text-white px-2">{varCount}/190</p>
                 <Button className={`${
-                  varCount > 192 ? "text-neutral-500" : ""
-                } ${varCount > 192 ? "opacity-50 cursor-not-allowed" : ""}`}>
+                  varCount > 190 ? "text-neutral-500" : ""
+                } ${varCount > 190 ? "opacity-50 cursor-not-allowed" : ""}`}>
                     Post
                 </Button>
             </div>
