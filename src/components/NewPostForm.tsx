@@ -3,6 +3,7 @@ import {ProfileImage} from "~/components/ProfileImage";
 import {useSession} from "next-auth/react";
 import {useState, useRef, useLayoutEffect, useCallback, type FormEvent, useEffect} from "react";
 import {api} from "~/utils/api";
+import { toast } from "react-toastify";
 
 function updateTextAreaSize(textArea?: HTMLTextAreaElement) {
     if (textArea == null) return;
@@ -39,6 +40,7 @@ function Form() {
     const createPost = api.post.create.useMutation({
         onSuccess: (newPost) => {
             setInputValue("");
+            toast.success('Posted! 😄');
 
             if (session.status !== "authenticated") return;
 
@@ -68,6 +70,9 @@ function Form() {
                 }
             })
         },
+        onError: (error) => {
+            toast.error(error.message + " 💀");
+        }
     });
 
     if (session.status !== "authenticated") return null;

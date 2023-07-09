@@ -1,4 +1,5 @@
 import { api } from "~/utils/api";
+import { toast } from "react-toastify";
 
 export const toggleFollowFunc = (id: string) => {
   const trpcUtils = api.useContext();
@@ -14,6 +15,7 @@ export const toggleFollowFunc = (id: string) => {
           followersCount: oldData.followersCount + countModifier,
         }
       })
+      toast.success(addedFollow ? "Followed 😄" : "Unfollowed 💀")
     }
   });
 }

@@ -27,9 +27,9 @@ Please note that additional authentication options may be added in the future ba
 
 ## About Me
 
-toadmilk is a breakcore artist who loves chopping breaks.
+toadmilk is a breakcore artist.
 
 Connect with me:
 
-- **Linktree:** Check out my links [Linktree](https://linktr.ee/toadmilk).
-- **Discord:** Join my discord server [https://discord.com/invite/qhVx9FZcUR](https://discord.com/invite/qhVx9FZcUR).
+- **Linktree:** Check out my [Linktree](https://linktr.ee/toadmilk).
+- **Discord:** Join my [Discord Server](https://discord.com/invite/qhVx9FZcUR).

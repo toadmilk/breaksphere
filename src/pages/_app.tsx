@@ -6,7 +6,7 @@ import "~/styles/globals.css";
 import Head from "next/head";
 import {SideNav} from "~/components/SideNav";
 import { FollowBar } from "~/components/FollowBar";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
 
 type ThemeProps = {
@@ -43,6 +43,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
+    toast.info(`Switched to ${newTheme} mode!`);
   }
 
   return (
@@ -68,6 +69,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
         </div>
         <ToastContainer
           position="bottom-right"
+          pauseOnFocusLoss={false}
+          theme={theme === 'light' ? 'light' : 'dark'}
         />
       </div>
     </SessionProvider>

@@ -9,6 +9,7 @@ import { LoadingSpinner } from "~/components/LoadingSpinner";
 import { BsTrashFill } from "react-icons/bs";
 import { ConfirmModal } from "~/components/ConfirmModal";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 type Post = {
     id: string,
@@ -100,10 +101,16 @@ function PostCard({
                 })
             }
         }
+            toast.success('Like added! 🥺');
             trpcUtils.post.infiniteFeed.setInfiniteData({}, updateData);
             trpcUtils.post.infiniteFeed.setInfiniteData({ onlyFollowing: true }, updateData);
             trpcUtils.post.infiniteProfileFeed.setInfiniteData({ userId: user.id }, updateData);
-        }});
+        },
+        onError: (error) => {
+            toast.error(error.message + " 💀");
+        }
+      },
+    );
 
     function handleToggleLike() {
         toggleLike.mutate({id});
@@ -124,10 +131,14 @@ function PostCard({
                     })
                 }
             }
+            toast.success('Post deleted! 😄');
             trpcUtils.post.infiniteFeed.setInfiniteData({}, updateData);
             trpcUtils.post.infiniteFeed.setInfiniteData({ onlyFollowing: true }, updateData);
             trpcUtils.post.infiniteProfileFeed.setInfiniteData({ userId: user.id }, updateData);
-        }
+        },
+        onError: (error) => {
+            toast.error(error.message + " 💀");
+        },
     });
 
     const session = useSession();

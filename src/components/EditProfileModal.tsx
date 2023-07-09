@@ -54,7 +54,7 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
       editProfile.mutate(formValues);
       toast.success('Profile updated successfully! 😄');
     } else {
-      toast.info('No changes made to profile. 💀');
+      toast.info('No changes made to profile 💀');
     }
     onClose();
   }
