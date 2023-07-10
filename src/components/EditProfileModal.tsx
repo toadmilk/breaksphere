@@ -1,11 +1,11 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React from "react";
 import { Button } from "~/components/Button";
 import { ProfileImage } from "~/components/ProfileImage";
 import { api } from "~/utils/api";
-import Uploader from "~/components/Uploader";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { UploadProfileImage } from "~/components/UploadThing";
 
 interface Profile {
   name: string;
@@ -58,7 +58,7 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
     }));
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     setVarCounts({
       name: formValues.name.length,
       bio: formValues.bio.length,
@@ -70,8 +70,6 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
 
   const renderCharCount = (fieldName: keyof Profile, max: number) => {
     const charCount = varCounts[fieldName];
-    const isOverLimit = charCount > max;
-
     return (
       <p className={`text-neutral-500 dark:text-neutral-300 mt-1`}>
         {charCount}/{max}
@@ -112,7 +110,7 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
           <div className="pt-4">
             <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-white">Change Profile Picture</label>
             <ProfileImage src={profile.image} className="w-36 h-36 mx-auto" />
-            <Uploader />
+            <UploadProfileImage />
           </div>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">

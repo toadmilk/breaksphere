@@ -20,7 +20,7 @@ const Home: NextPage<ThemeProps> = ({ theme, toggleTheme }) => {
       <>
           <header className="sticky top-0 z-10 border-b dark:border-neutral-700 bg-white dark:bg-black pt-2">
             <div className="flex">
-              <h1 className="mb-2 px-4 pt-1 text-lg dark:text-white font-bold">Home</h1>
+              <h1 className="mb-2 px-4 pt-1 text-2xl dark:text-white font-bold">Home</h1>
               <ThemeButton theme={theme} toggleTheme={toggleTheme} />
             </div>
             {session.status === "authenticated" && (

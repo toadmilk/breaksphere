@@ -71,6 +71,34 @@ export const postRouter = createTRPCRouter({
                 return { addedLike: false }
             }
         }),
+    getById: publicProcedure.input(z.object({ id: z.string() }))
+        .query(async ({ input: { id }, ctx }) => {
+            const currentUserId = ctx.session?.user.id;
+            const post = await ctx.prisma.post.findUnique({
+                where: { id },
+                select: {
+                    id: true,
+                    content: true,
+                    createdAt: true,
+                    _count: { select: { likes: true } },
+                    likes:
+                      currentUserId == null ? false
+                        : { where: { userId: currentUserId }},
+                    user: {
+                        select: { id: true, name: true, image: true }
+                    },
+                }
+            })
+            if (post == null) return null;
+            return {
+                id: post.id,
+                content: post.content,
+                createdAt: post.createdAt,
+                likeCount: post._count.likes,
+                user: post.user,
+                likedByMe: post.likes?.length > 0,
+            }
+        }),
 });
 
 async function getInfinitePosts({

@@ -1,9 +1,10 @@
 import {Button} from "~/components/Button";
 import {ProfileImage} from "~/components/ProfileImage";
 import {useSession} from "next-auth/react";
-import {useState, useRef, useLayoutEffect, useCallback, type FormEvent, useEffect} from "react";
+import React, {useState, useRef, useLayoutEffect, useCallback, type FormEvent, useEffect} from "react";
 import {api} from "~/utils/api";
 import { toast } from "react-toastify";
+import { UploadFile } from "~/components/UploadThing";
 
 function updateTextAreaSize(textArea?: HTMLTextAreaElement) {
     if (textArea == null) return;
@@ -95,11 +96,10 @@ function Form() {
                     placeholder="What's choppin!"
                 />
             </div>
+            {/*<UploadFile />*/}
             <div className="flex items-center self-end">
-                <p className="dark:text-white px-2">{varCount}/190</p>
-                <Button className={`${
-                  varCount > 190 ? "text-neutral-500" : ""
-                } ${varCount > 190 ? "opacity-50 cursor-not-allowed" : ""}`}>
+                <p className={`px-2 ${varCount > 190 ? "text-red-500" : "dark:text-white"}`}>{varCount}/190</p>
+                <Button className={`${varCount > 190 ? "opacity-50 cursor-not-allowed" : ""}`}>
                     Post
                 </Button>
             </div>

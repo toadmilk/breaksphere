@@ -11,7 +11,7 @@ import { InfinitePostList } from "~/components/InfinitePostList";
 //import { FollowBar } from "~/components/FollowBar";
 import FollowButton from "~/components/FollowButton";
 import { toggleFollowFunc } from "~/utils/toggleFollowFunc";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EditProfileModal } from "~/components/EditProfileModal";
 import { Button } from "~/components/Button";
 import { useSession } from "next-auth/react";
@@ -37,13 +37,18 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
   const [isFollowingModalOpen, setFollowingModalState] = useState(false);
   const toggleFollowingModal = () => setFollowingModalState(!isFollowingModalOpen);
 
+  // Reset modals when navigating to a different profile
+  useEffect(() => {
+    setEditProfileModalState(false);
+    setFollowersModalState(false);
+    setFollowingModalState(false);
+  }, [id]);
+
   if (profile == null || profile.name == null) {
     return <ErrorPage statusCode={404} />;
   }
 
   const toggleFollow = toggleFollowFunc(id);
-
-
 
   return (
     <>

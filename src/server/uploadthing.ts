@@ -56,34 +56,34 @@ export const ourFileRouter = {
         console.error("Error updating user:", error);
       }
     }),
-  // postImage: f({ image: { maxFileSize: "16MB" } })
-  //   .middleware(async ({ req, res }) => {
-  //     const session = await getServerAuthSession({ req, res });
-  //
-  //     if (!session || !session.user) {
-  //       throw new Error("Unauthorized");
-  //     }
-  //
-  //     const postId = req.query.postId as string;
-  //
-  //     return { postId };
-  //   })
-  //   .onUploadComplete(async ({ metadata, file }) => {
-  //     console.log("Upload complete for postId:", metadata.postId);
-  //     console.log("file url", file.url);
-  //
-  //     try {
-  //       const post = await prisma.post.update({
-  //         where: { id: metadata.postId },
-  //         data: { file: file.url },
-  //       });
-  //
-  //       console.log("Post updated:", post);
-  //
-  //     } catch (error) {
-  //       console.error("Error updating user:", error);
-  //     }
-  //   }),
+  postFile: f({ image: { maxFileSize: "16MB" } })
+    .middleware(async ({ req, res }) => {
+      const session = await getServerAuthSession({ req, res });
+
+      if (!session || !session.user) {
+        throw new Error("Unauthorized");
+      }
+
+      const postId = req.query.postId as string;
+
+      return { postId };
+    })
+    .onUploadComplete(async ({ metadata, file }) => {
+      console.log("Upload complete for postId:", metadata.postId);
+      console.log("file url", file.url);
+
+      try {
+        const post = await prisma.post.update({
+          where: { id: metadata.postId },
+          data: { file: file.url },
+        });
+
+        console.log("Post updated:", post);
+
+      } catch (error) {
+        console.error("Error updating user:", error);
+      }
+    }),
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;
