@@ -1,7 +1,9 @@
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { VscHeart, VscHeartFilled } from "react-icons/vsc";
 import { IconHoverEffect } from "~/components/IconHoverEffect";
 import { BsTrashFill } from "react-icons/bs";
+import Link from "next/link";
+import { BiLogIn } from "react-icons/bi";
 
 type HeartButtonProps = {
   likedByMe: boolean;
@@ -21,8 +23,10 @@ export function HeartButton({
 
   if(session.status !== "authenticated") {
     return (<div className="mb-1 mt-1 flex items-center gap-3 self-start text-neutral-500">
-      <HeartIcon />
-      <span>{likeCount}</span>
+      <button onClick={() => void signIn()}>
+        <HeartIcon />
+        <span>{likeCount}</span>
+      </button>
     </div>)
   }
   return (
@@ -70,4 +74,33 @@ export function DeleteButton({
       </IconHoverEffect>
     </button>
   )
+}
+
+import React from 'react';
+import { toast } from "react-toastify";
+import { AiOutlineShareAlt } from "react-icons/ai";
+
+type ShareButtonProps = {
+  postId: string;
+}
+
+export function ShareButton({ postId }: ShareButtonProps) {
+  const handleCopyLink = () => {
+    const postUrl = `${window.location.origin}/posts/${postId}`;
+    navigator.clipboard.writeText(postUrl)
+      .then(() => {
+        toast.success('Link copied to clipboard:' + postUrl + " 😄");
+      })
+      .catch((error) => {
+        toast.error('Failed to copy link: ' + String(error) + ' 💀');
+      });
+  };
+
+  return (
+    <button className="" onClick={handleCopyLink}>
+      <IconHoverEffect>
+        <AiOutlineShareAlt className="self-center w-5 h-5 fill-neutral-500 hover:fill-neutral-500 focus-visible:fill-neutral-500" />
+      </IconHoverEffect>
+    </button>
+  );
 }

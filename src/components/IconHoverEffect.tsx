@@ -5,7 +5,7 @@ type IconHoverEffectProps = {
     red?: boolean;
 }
 
-export function IconHoverEffect({ children, red = false}: IconHoverEffectProps) {
+export function IconHoverEffect({ children, red = false }: IconHoverEffectProps) {
     const colorClasses = red
         ? "outline-red-400 hover:bg-red-200 group-hover-bg-red-200 group-focus-visible:bg-red-200 focus-visible:bg-red-200"
         : "outline-neutral-400 hover:bg-neutral-200 group-hover:bg-neutral-200 group-focus-visible:bg-neutral-200 focus-visible:bg-neutral-200" +

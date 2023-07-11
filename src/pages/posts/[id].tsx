@@ -9,44 +9,22 @@ import { IconHoverEffect } from "~/components/IconHoverEffect";
 import { VscArrowLeft } from "react-icons/vsc";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { HeartButton, DeleteButton } from "~/components/PostButtons";
+import { HeartButton, DeleteButton, ShareButton } from "~/components/PostButtons";
 import { ConfirmModal } from "~/components/ConfirmModal";
 import { ProfileImage } from "~/components/ProfileImage";
+import { router } from "next/client";
 
 const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
   { id }
 ) => {
+  const router = useRouter();
   const session = useSession();
   const user = session.data?.user;
   const { data: post } = api.post.getById.useQuery({ id });
 
-  const trpcUtils = api.useContext();
   const toggleLike = api.post.toggleLike.useMutation({
-    onSuccess: ({ addedLike }) => {
-      // const updateData: Parameters<typeof trpcUtils.post.infiniteFeed.setInfiniteData>[1] = (oldData) => {
-      //   if (oldData == null) return;
-      //
-      //   const countModifier = addedLike ? 1 : -1;
-      //
-      //   return {
-      //     ...oldData,
-      //     pages: oldData.pages.map((page) => {
-      //       return {
-      //         ...page,
-      //         posts: page.posts.map((post) => {
-      //           if (post.id === id) {
-      //             return {
-      //               ...post,
-      //               likedByMe: addedLike,
-      //               likeCount: post.likeCount + countModifier,
-      //             };
-      //           }
-      //           return post;
-      //         }),
-      //       };
-      //     }),
-      //   };
-      // };
+    onSuccess: (data, postId) => {
+      const { addedLike } = data;
       if (addedLike) {
         toast.success('Like added! 🥺');
       } else {
@@ -56,11 +34,14 @@ const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
     onError: (error) => {
       toast.error(error.message + ' 💀');
     },
-  });
+  });h
 
   const deletePost = api.post.delete.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success('Post deleted! 😄');
+      await (async () => {
+        await router.push('/');
+      })();
     },
     onError: (error) => {
       toast.error(error.message + ' 💀');
@@ -119,7 +100,7 @@ const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
             <div className="flex gap-1">
               <Link
                 href={`/profiles/${post.user.id}`}
-                className="font-bold hover:underline focus-visible:underline dark:text-white"
+                className="font-bold text-lg hover:underline focus-visible:underline dark:text-white"
               >
                 {post.user.name}
               </Link>
@@ -136,6 +117,7 @@ const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
                 likeCount={post.likeCount}
               />
               <DeleteButton onClick={openDeleteModal} postOwnerId={post.user.id} />
+              <ShareButton postId={post.id}/>
             </div>
           </div>
         </li>

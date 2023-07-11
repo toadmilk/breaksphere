@@ -7,7 +7,7 @@ import { LoadingSpinner } from "~/components/LoadingSpinner";
 import { ConfirmModal } from "~/components/ConfirmModal";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { HeartButton, DeleteButton } from "~/components/PostButtons";
+import { HeartButton, DeleteButton, ShareButton } from "~/components/PostButtons";
 
 type Post = {
     id: string,
@@ -161,8 +161,8 @@ function PostCard({
         deletePost.mutate({id});
     }
 
+    // <Link href={`/posts/${id}`}>
     return (
-      <Link href={`/posts/${id}`}>
           <li className="flex gap-4 border-b dark:border-neutral-700 px-4 py-4">
               <ConfirmModal
                 isOpen={isDeleteModalOpen}
@@ -187,9 +187,9 @@ function PostCard({
                   <div className="flex">
                       <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount} />
                       <DeleteButton onClick={openDeleteModal} postOwnerId={user.id} />
+                      <ShareButton postId={id}/>
                   </div>
               </div>
           </li>
-      </Link>
     );
 }
