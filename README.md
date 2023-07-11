@@ -25,10 +25,6 @@ Choose the authentication method that suits you best and start exploring Breaksp
 
 Please note that additional authentication options may be added in the future based on user feedback and requirements.
 
-## Trello Board
-
-To keep track of the project's bugs and progress, I am using Trello. You can view my progress [here](https://trello.com/b/Mt7Uddx4).
-
 ## About Me
 
 I am a breakcore artist.
