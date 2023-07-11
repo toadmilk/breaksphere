@@ -25,21 +25,6 @@ Choose the authentication method that suits you best and start exploring Breaksp
 
 Please note that additional authentication options may be added in the future based on user feedback and requirements.
 
-## Bug Reporting
-
-If you encounter any bugs or issues while using BreakSphere, please help us improve by reporting them. To open an issue, follow these steps:
-
-1. Go to the [Issues](https://github.com/toadmilk/breaksphere/issues) section of the project repository on GitHub.
-2. Click on the "New Issue" button.
-3. Provide a descriptive title for the issue.
-4. In the issue description, include the following details:
-   - Steps to reproduce the issue.
-   - Expected behavior.
-   - Actual behavior observed.
-   - Any relevant error messages or screenshots.
-
-Your feedback and bug reports are highly valuable in helping us improve BreakSphere. Thank you for your contribution!
-
 ## Trello Board
 
 To keep track of the project's bugs and progress, I am using Trello. You can view my progress [here](https://trello.com/b/Mt7Uddx4).
