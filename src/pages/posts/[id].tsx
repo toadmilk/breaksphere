@@ -34,7 +34,7 @@ const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
     onError: (error) => {
       toast.error(error.message + ' 💀');
     },
-  });h
+  });
 
   const deletePost = api.post.delete.useMutation({
     onSuccess: async () => {
