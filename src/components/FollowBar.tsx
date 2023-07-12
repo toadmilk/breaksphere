@@ -50,18 +50,20 @@ export function FollowBar({ id, title, }: FollowBarProps) {
   const profiles = api.profile.getFollowers.useQuery({ id, title });
 
   return (
-    <div className="px-6 py-4 hidden lg:block">
+    <>
       {profiles.data && profiles.data.length > 0 ? (
-        <div className="bg-neutral-300 dark:bg-neutral-800 rounded-xl p-4">
-          <h2 className="dark:text-white text-xl font-semibold">{title}</h2>
-          <div className="flex flex-col gap-6 mt-4">
-            {profiles.data.map((user) => {
-              return userCard(user, id);
-            })}
+      <div className="px-6 py-4 hidden lg:block">
+          <div className="bg-neutral-300 dark:bg-neutral-800 rounded-xl p-4">
+            <h2 className="dark:text-white text-xl font-semibold">{title}</h2>
+            <div className="flex flex-col gap-6 mt-4">
+              {profiles.data.map((user) => {
+                return userCard(user, id);
+              })}
+            </div>
           </div>
-        </div>
+      </div>
       ) : null }
-    </div>
+    </>
   );
 }
 

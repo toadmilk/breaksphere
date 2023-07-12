@@ -164,32 +164,32 @@ function PostCard({
     // <Link href={`/posts/${id}`}>
     return (
           <li className="flex gap-4 border-b dark:border-neutral-700 px-4 py-4">
-              <ConfirmModal
-                isOpen={isDeleteModalOpen}
-                content="Are you sure you want to delete this post?"
-                onCancel={closeDeleteModal}
-                onConfirm={handleDeletePost}
-              />
-              <Link href={`/profiles/${user.id}`}>
-                  <ProfileImage src={user.image} />
-              </Link>
-              <div className="flex flex-grow flex-col">
-                  <div className="flex gap-1">
-                      <Link
-                        href={`/profiles/${user.id}`}
-                        className="font-bold hover:underline focus-visible:underline dark:text-white"
-                      >
-                          {user.name}
-                      </Link>
-                      <span className="text-neutral-500">{dateTimeFormatter.format(createdAt)}</span>
-                  </div>
-                  <p className="whitespace-pre-wrap break-words dark:text-white">{content}</p>
-                  <div className="flex">
-                      <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount} />
-                      <DeleteButton onClick={openDeleteModal} postOwnerId={user.id} />
-                      <ShareButton postId={id}/>
-                  </div>
+          <ConfirmModal
+            isOpen={isDeleteModalOpen}
+            content="Are you sure you want to delete this post?"
+            onCancel={closeDeleteModal}
+            onConfirm={handleDeletePost}
+          />
+          <Link href={`/profiles/${user.id}`}>
+              <ProfileImage src={user.image} />
+          </Link>
+            <div className="flex min-w-0 flex-grow flex-col">
+              <div className="flex min-w-0 break-words gap-1">
+                  <Link
+                    href={`/profiles/${user.id}`}
+                    className="font-bold min-w-0 break-words hover:underline focus-visible:underline dark:text-white"
+                  >
+                      <p className="min-w-0 break-words">{user.name}</p>
+                  </Link>
+                  <span className="text-neutral-500">{dateTimeFormatter.format(createdAt)}</span>
               </div>
-          </li>
+              <p className="min-w-0 break-words py-1 dark:text-white">{content}</p>
+              <div className="flex">
+                  <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount} />
+                  <DeleteButton onClick={openDeleteModal} postOwnerId={user.id} />
+                  {/*<ShareButton postId={id}/> TODO: Reenable*/}
+              </div>
+          </div>
+        </li>
     );
 }

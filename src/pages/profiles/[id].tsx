@@ -50,6 +50,7 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
   const toggleFollow = toggleFollowFunc(id);
 
+  //hidden sm:block
   return (
     <>
       <FollowBarModal title={'Followers'} isOpen={isFollowersModalOpen} onClose={toggleFollowersModal} id={id} />
@@ -58,46 +59,54 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
       <Head>
         <title>{`BreakSphere - ${profile.name}`}</title>
       </Head>
-      <header className="sticky top-0 z-20 grid grid-cols-[repeat(2,auto)_1fr_auto] items-center gap-2 border-b bg-white px-4 py-2 dark:border-neutral-700 dark:bg-black">
-        <Link href=".." className="mr-2">
+      <header className="min-w-0 sticky top-0 z-20 grid grid-cols-[repeat(2,auto)_1fr_auto] items-center gap-2 border-b bg-white px-4 py-2 dark:border-neutral-700 dark:bg-black">
+        <Link href=".." className="">
           <IconHoverEffect>
             <VscArrowLeft className="h-6 w-6 dark:fill-white" />
           </IconHoverEffect>
         </Link>
         <ProfileImage src={profile.image} className="flex-shrink-0" />
-        <div>
+        <div className="min-w-0 break-words">
           <h1 className="text-lg font-bold dark:text-white">{profile.name}</h1>
-          <span className="text-neutral-500 ">@{profile.id}</span>
+          <span className="text-neutral-500">@{profile.id}</span>
         </div>
         <FollowButton
           isFollowing={profile.isFollowing}
           isLoading={toggleFollow.isLoading}
           userId={id}
-          onClick={() => toggleFollow.mutate({userId: id})}
+          onClick={() => toggleFollow.mutate({ userId: id })}
         />
         {profile.id === userId && (
-          <Button onClick={toggleEditProfileModal}>
+          <Button className="hidden sm:block" onClick={toggleEditProfileModal}>
             Edit Profile
           </Button>
         )}
-        <div className="col-start-3">
-          <div className="flex flex-col items-start break-all">
+        <div className="col-start-3 min-w-0 break-words">
+          {profile.id === userId && (
+            <Button className="sm:hidden my-1" onClick={toggleEditProfileModal}>
+              Edit Profile
+            </Button>
+          )}
+          <div className="flex flex-col items-start">
             {profile.bio ? (
-              <span className="dark:text-white pb-2">{profile.bio}</span>
+              <p className="break-words dark:text-white pb-2">{profile.bio}</p>
             ) : null}
             {profile.website ? (
-              <div className="flex items-center">
-                <BsGlobe className="fill-neutral-500 dark:fill-neutral-300" />
-                <Link className="text-blue-600 dark:text-blue-500 hover:underline ml-1" href={profile.website}>
+              <div className="flex">
+                <BsGlobe className="w-5 h-5 fill-neutral-500 dark:fill-neutral-300" />
+                <Link
+                  className="break-all text-blue-600 dark:text-blue-500 hover:underline ml-1"
+                  href={profile.website}
+                >
                   {profile.website}
                 </Link>
               </div>
             ) : null}
             {profile.location ? (
-            <div className="flex items-center">
-              <FaLocationDot className="fill-neutral-500 dark:fill-neutral-300" />
-              <span className="text-neutral-500 dark:text-neutral-300 ml-1">{profile.location}</span>
-            </div>
+              <div className="flex">
+                <FaLocationDot className="w-5 h-5 fill-neutral-500 dark:fill-neutral-300" />
+                <span className="text-neutral-500 dark:text-neutral-300 ml-1">{profile.location}</span>
+              </div>
             ) : null}
           </div>
           <div className="text-neutral-500">
@@ -105,8 +114,9 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
             {getPlural(profile.postsCount, "Post", "Posts")} -{" "}
             <button onClick={toggleFollowersModal} className="hover:underline">
               <span className="font-semibold text-black dark:text-white">{profile.followersCount}</span>{" "}
-            {getPlural(profile.followersCount, "Follower", "Followers")}
-            </button>  -{" "}
+              {getPlural(profile.followersCount, "Follower", "Followers")}
+            </button>{" "}
+            -{" "}
             <button onClick={toggleFollowingModal} className="hover:underline">
               <span className="font-semibold text-black dark:text-white">{profile.followsCount}</span>{" "}
               {getPlural(profile.followsCount, "Follow", "Following")}
@@ -124,7 +134,7 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
         />
       </main>
     </>
-  )
+  );
 }
 
 const pluralRules = new Intl.PluralRules();

@@ -57,9 +57,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
           />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div className="container mx-auto flex items-start sm:pr-4">
+        <div className="container mx-auto flex items-start">
           <SideNav />
-          <div className="min-h-screen flex-grow border-x dark:border-neutral-700">
+          <div className="min-h-screen min-w-0 flex-grow border-x dark:border-neutral-700">
               <Component {...pageProps} theme={theme} toggleTheme={toggleTheme} />
           </div>
           <FollowBar
