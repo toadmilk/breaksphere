@@ -27,7 +27,7 @@ Please note that additional authentication options may be added in the future ba
 
 ## About Me
 
-toadmilk is a breakcore artist.
+I am a breakcore artist.
 
 Connect with me:
 
