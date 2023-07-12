@@ -183,7 +183,7 @@ function PostCard({
                       </Link>
                       <span className="text-neutral-500">{dateTimeFormatter.format(createdAt)}</span>
                   </div>
-                  <p className="whitespace-pre-wrap dark:text-white">{content}</p>
+                  <p className="whitespace-pre-wrap break-all dark:text-white">{content}</p>
                   <div className="flex">
                       <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount} />
                       <DeleteButton onClick={openDeleteModal} postOwnerId={user.id} />
