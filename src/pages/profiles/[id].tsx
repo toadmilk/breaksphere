@@ -15,9 +15,9 @@ import { useEffect, useState } from "react";
 import { EditProfileModal } from "~/components/EditProfileModal";
 import { Button } from "~/components/Button";
 import { useSession } from "next-auth/react";
-import { FaLocationDot } from "react-icons/fa6";
-import { BsGlobe } from "react-icons/bs";
 import { FollowBarModal } from "~/components/FollowBar";
+import { FiMapPin, FiLink } from "react-icons/fi";
+import { AiOutlineLink } from "react-icons/ai";
 
 const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
   {
@@ -66,50 +66,63 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
           </IconHoverEffect>
         </Link>
         <ProfileImage src={profile.image} className="flex-shrink-0" />
-        <div className="min-w-0 break-words">
-          <h1 className="text-lg font-bold dark:text-white">{profile.name}</h1>
-          <span className="text-neutral-500">@{profile.id}</span>
+        <div className="min-w-0">
+          <h1 className="min-w-0 break-words text-lg font-semibold dark:text-white">{profile.name}</h1>
+          {/*<span className="text-neutral-500">@{profile.id}</span>*/}
         </div>
-        <FollowButton
-          isFollowing={profile.isFollowing}
-          isLoading={toggleFollow.isLoading}
-          userId={id}
-          onClick={() => toggleFollow.mutate({ userId: id })}
-        />
-        {profile.id === userId && (
-          <Button className="hidden sm:block" onClick={toggleEditProfileModal}>
-            Edit Profile
-          </Button>
-        )}
-        <div className="col-start-3 min-w-0 break-words">
+        <div className="hidden sm:block">
           {profile.id === userId && (
-            <Button className="sm:hidden my-1" onClick={toggleEditProfileModal}>
+            <Button onClick={toggleEditProfileModal}>
               Edit Profile
             </Button>
           )}
-          <div className="flex flex-col items-start">
+          <FollowButton
+            isFollowing={profile.isFollowing}
+            isLoading={toggleFollow.isLoading}
+            userId={id}
+            onClick={() => toggleFollow.mutate({ userId: id })}
+          />
+        </div>
+        <div className="col-start-3 min-w-0">
+          <div className="sm:hidden pb-2">
+            {profile.id === userId && (
+              <Button onClick={toggleEditProfileModal}>
+                Edit Profile
+              </Button>
+            )}
+            <FollowButton
+              isFollowing={profile.isFollowing}
+              isLoading={toggleFollow.isLoading}
+              userId={id}
+              onClick={() => toggleFollow.mutate({ userId: id })}
+            />
+          </div>
+          <div className="min-w-0 flex flex-col items-start">
             {profile.bio ? (
-              <p className="break-words dark:text-white pb-2">{profile.bio}</p>
-            ) : null}
-            {profile.website ? (
-              <div className="flex">
-                <BsGlobe className="w-5 h-5 fill-neutral-500 dark:fill-neutral-300" />
-                <Link
-                  className="break-all text-blue-600 dark:text-blue-500 hover:underline ml-1"
-                  href={profile.website}
-                >
-                  {profile.website}
-                </Link>
-              </div>
+              <span className="min-w-0 max-w-full break-words dark:text-white pb-2">{profile.bio}</span>
             ) : null}
             {profile.location ? (
-              <div className="flex">
-                <FaLocationDot className="w-5 h-5 fill-neutral-500 dark:fill-neutral-300" />
-                <span className="text-neutral-500 dark:text-neutral-300 ml-1">{profile.location}</span>
+              <div className="min-w-0 max-w-full flex items-center">
+                <FiMapPin className="w-5 h-5 stroke-current text-neutral-600 dark:text-neutral-300 flex-shrink-0" style={{ transform: 'translateY(0.25px)' }} />
+                <span className="truncate text-neutral-600 dark:text-neutral-300 ml-1 ">{profile.location}</span>
+              </div>
+            ) : null}
+            {profile.website ? (
+              <div className="min-w-0 max-w-full flex items-center">
+                <AiOutlineLink className="w-5 h-5 fill-neutral-600 dark:fill-neutral-300 flex-shrink-0" />
+                  {profile.website && (
+                    <Link
+                      className="truncate text-blue-600 dark:text-blue-500 hover:underline ml-1"
+                      href={profile.website}
+                      title={profile.website}
+                    >
+                      {profile.website}
+                    </Link>
+                  )}
               </div>
             ) : null}
           </div>
-          <div className="text-neutral-500">
+          <div className="text-neutral-500 pt-1">
             <span className="font-semibold text-black dark:text-white">{profile.postsCount}</span>{" "}
             {getPlural(profile.postsCount, "Post", "Posts")} -{" "}
             <button onClick={toggleFollowersModal} className="hover:underline">

@@ -96,6 +96,13 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
     onClose();
   }
 
+  const MaxValues = {
+    NAME: 50,
+    BIO: 150,
+    LOCATION: 50,
+    WEBSITE: 60,
+  };
+
   return isOpen ? (
     <div className={'fixed inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-50 dark:text-white py-2'}>
       <div ref={outsideRef} className={'modal__overlay'} onClick={handleCloseOnOverlay} />
@@ -121,11 +128,11 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
                 name="name"
                 id="name"
                 placeholder="Enter your name"
-                maxLength={50}
+                maxLength={MaxValues.NAME}
                 value={formValues.name}
                 onChange={handleChange}
               />
-              {renderCharCount("name", 50)}
+              {renderCharCount("name", MaxValues.NAME)}
             </div>
             <div className="mb-4">
               <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-white">Bio</label>
@@ -133,12 +140,12 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-neutral-900"
                 name="bio"
                 placeholder="Enter your bio"
-                maxLength={200}
+                maxLength={MaxValues.BIO}
                 rows={4}
                 value={formValues.bio}
                 onChange={handleChange}
               ></textarea>
-              {renderCharCount("bio", 200)}
+              {renderCharCount("bio", MaxValues.BIO)}
             </div>
             <div className="mb-4">
               <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-white">Location</label>
@@ -146,12 +153,12 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500 dark:bg-neutral-900"
                 type="text"
                 name="location"
-                maxLength={50}
+                maxLength={MaxValues.LOCATION}
                 placeholder="Enter your location"
                 value={formValues.location}
                 onChange={handleChange}
               />
-              {renderCharCount("location", 50)}
+              {renderCharCount("location", MaxValues.LOCATION)}
             </div>
             <div className="mb-4">
               <label className="block mb-2 text-sm font-semibold text-gray-700 dark:text-white">Website</label>
@@ -160,11 +167,11 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
                 type="text"
                 name="website"
                 placeholder="Enter your website"
-                maxLength={60}
+                maxLength={MaxValues.WEBSITE}
                 value={formValues.website}
                 onChange={handleChange}
               />
-              {renderCharCount("website", 60)}
+              {renderCharCount("website", MaxValues.WEBSITE)}
             </div>
             <div className="flex justify-end">
               <Button type="submit">Save</Button>

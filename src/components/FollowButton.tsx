@@ -2,10 +2,10 @@ import { useSession } from "next-auth/react";
 import { Button } from "~/components/Button";
 
 export default function FollowButton( {
-                         userId,
-                         isFollowing,
-                         isLoading,
-                         onClick }: {
+  userId,
+  isFollowing,
+  isLoading,
+  onClick }: {
   userId: string;
   isFollowing: boolean;
   isLoading: boolean;

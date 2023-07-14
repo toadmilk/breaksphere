@@ -179,7 +179,7 @@ function PostCard({
                     href={`/profiles/${user.id}`}
                     className="font-bold min-w-0 break-words hover:underline focus-visible:underline dark:text-white"
                   >
-                      <p className="min-w-0 break-words">{user.name}</p>
+                      <p className="truncate">{user.name}</p>
                   </Link>
                   <span className="text-neutral-500">{dateTimeFormatter.format(createdAt)}</span>
               </div>
