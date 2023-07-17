@@ -13,7 +13,7 @@ BreakSphere is a Twitter-like platform designed specifically for musicians by mu
 
 ## Deployment and Authentication
 
-Breaksphere is deployed on [Vercel](https://vercel.com/) and can be accessed at [breaksphere.vercel.app](https://breaksphere.vercel.app/). 
+Breaksphere is deployed on Vercel and can be accessed at [breaksphere.vercel.app](https://breaksphere.vercel.app/). 
 
 To sign in to Breaksphere, you have multiple authentication options available, including:
 
