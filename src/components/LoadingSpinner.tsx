@@ -8,7 +8,7 @@ export function LoadingSpinner({big = false}: LoadingSpinnerProps) {
   const sizeClasses = big ? "w-16 h-16" : "w-10 h-10"
 
   return (
-    <div className="justify-center">
+    <div className="flex justify-center min-h-0">
       <ImSpinner2 className={`animate-spin dark:fill-white ${sizeClasses}`} />
     </div>
   );

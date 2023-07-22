@@ -185,7 +185,7 @@ function PostCard({
               </div>
               <p className="min-w-0 break-words py-1 dark:text-white">{content}</p>
               <div className="flex">
-                  <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount} />
+                  <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount} id={id} />
                   <DeleteButton onClick={openDeleteModal} postOwnerId={user.id} />
                   {/*<ShareButton postId={id}/> TODO: Reenable*/}
               </div>

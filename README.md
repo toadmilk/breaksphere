@@ -13,17 +13,21 @@ BreakSphere is a Twitter-like platform designed specifically for musicians by mu
 
 ## Deployment and Authentication
 
-Breaksphere is deployed on Vercel and can be accessed at [breaksphere.vercel.app](https://breaksphere.vercel.app/). 
+BreakSphere is deployed on Vercel and can be accessed at [breaksphere.vercel.app](https://breaksphere.vercel.app/). 
 
-To sign in to Breaksphere, you have multiple authentication options available, including:
+To sign in to BreakSphere, you have multiple authentication options available, including:
 
 - Discord
 - Google
 - GitHub
 
-Choose the authentication method that suits you best and start exploring Breaksphere's vibrant community of musicians!
+Choose the authentication method that suits you best and start exploring BreakSphere's vibrant community of musicians!
 
 Please note that additional authentication options may be added in the future based on user feedback and requirements.
+
+## Organizing with Trello
+
+In developing BreakSphere, Trello was a vital tool. My Trello board, accessible [here](https://trello.com/b/Mt7Uddx4/breaksphere), is divided into sections: 'Bugs', 'To Do', 'Maybe', 'Doing', and 'Done'. This categorization streamlined my workflow, enabling efficient task tracking and prioritization.
 
 ## About Me
 

@@ -28,17 +28,18 @@ export const postRouter = createTRPCRouter({
             limit: z.number().optional(),
             cursor: z.object({ id: z.string(), createdAt: z.date() }).optional(),
         })
-    ).query(async ({ input: { limit = 10, onlyFollowing = false, cursor }, ctx }) => {
-        const currentUserId = ctx.session?.user.id;
-        return await getInfinitePosts({
-            limit, ctx, cursor, whereClause: currentUserId == null || !onlyFollowing ? undefined : {
-                user: {
-                    followers: {
-                        some: { id: currentUserId },
-                    }
-                }
-            },
-        })
+    )
+    .query(async ({ input: { limit = 10, onlyFollowing = false, cursor }, ctx }) => {
+      const currentUserId = ctx.session?.user.id;
+      return await getInfinitePosts({
+          limit, ctx, cursor, whereClause: currentUserId == null || !onlyFollowing ? undefined : {
+              user: {
+                  followers: {
+                      some: { id: currentUserId },
+                  },
+              }
+          },
+      })
     }),
     create: protectedProcedure
         .input(z.object({ content: z.string() }))
@@ -99,6 +100,18 @@ export const postRouter = createTRPCRouter({
                 likedByMe: post.likes?.length > 0,
             }
         }),
+    getLikedBy: publicProcedure.input(z.object({ id: z.string() }))
+      .query(async ({ input: { id }, ctx }) => {
+        const likes = await ctx.prisma.like.findMany({
+          where: { postId: id },
+          select: {
+            user: {
+              select: { id: true, name: true, image: true },
+            },
+          },
+        });
+        return likes.map((like) => like.user);
+      }),
 });
 
 async function getInfinitePosts({

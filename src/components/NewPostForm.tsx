@@ -80,6 +80,7 @@ function Form() {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
+        if (inputValue.trim().length === 0 || inputValue.length > 190) return;
         createPost.mutate({ content: inputValue });
     }
 
@@ -99,7 +100,7 @@ function Form() {
             {/*<UploadFile />*/}
             <div className="flex items-center self-end">
                 <p className={`px-2 ${varCount > 190 ? "text-red-500" : "dark:text-white"}`}>{varCount}/190</p>
-                <Button className={`${varCount > 190 ? "opacity-50 cursor-not-allowed" : ""}`}>
+                <Button className={`${(varCount > 190 || varCount < 1) ? "opacity-50 cursor-not-allowed" : ""}`}>
                     Post
                 </Button>
             </div>

@@ -12,7 +12,6 @@ import { useRouter } from "next/router";
 import { HeartButton, DeleteButton, ShareButton } from "~/components/PostButtons";
 import { ConfirmModal } from "~/components/ConfirmModal";
 import { ProfileImage } from "~/components/ProfileImage";
-import { router } from "next/client";
 
 const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
   { id }
@@ -96,7 +95,7 @@ const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
           <Link href={`/profiles/${post.user.id}`}>
             <ProfileImage src={post.user.image} />
           </Link>
-          <div className="flex flex-grow flex-col">
+          <div className="flex flex-grow flex-col min-w-0">
             <div className="flex gap-1">
               <Link
                 href={`/profiles/${post.user.id}`}
@@ -107,7 +106,7 @@ const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
               {/*<span className="text-neutral-500">@{user.id} · </span> TODO: add this back when users can change their ids*/}
             </div>
             <span className="text-neutral-500">@{post.user.id}</span>
-            <p className="whitespace-pre-wrap py-2 dark:text-white">{post.content}</p>
+            <p className="min-w-0 break-words py-1 dark:text-white">{post.content}</p>
             <span className="text-neutral-500" suppressHydrationWarning={true}>{postCreatedAt}</span>
             <div className="flex">
               <HeartButton
@@ -115,6 +114,7 @@ const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
                 isLoading={toggleLike.isLoading}
                 likedByMe={post.likedByMe}
                 likeCount={post.likeCount}
+                id={post.id}
               />
               <DeleteButton onClick={openDeleteModal} postOwnerId={post.user.id} />
               <ShareButton postId={post.id}/>
