@@ -1,6 +1,6 @@
 # BreakSphere
 
-BreakSphere is a Twitter-like platform designed specifically for musicians by musicians. It provides a space for musicians to connect, share their work, and collaborate with others in the industry. This project is built using the T3 Stack, which combines several powerful technologies to create a robust and efficient application.
+BreakSphere is a Twitter-like platform designed specifically for musicians by musicians. It provides a space for musicians to connect, share their work, and collaborate with others in the industry.
 
 ## Technologies Used
 
