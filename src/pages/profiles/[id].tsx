@@ -58,7 +58,6 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
   const toggleFollow = toggleFollowFunc(id);
 
-  //hidden sm:block
   return (
     <>
       {isFollowersModalOpen && (
@@ -91,13 +90,13 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       {profile.isLoading ? (
         <div>Loading...</div>
       ) : (
-        <header className="sticky top-0 z-20 grid min-w-0 grid-cols-[repeat(3,auto)] items-center gap-2 border-b bg-white px-4 py-2 dark:border-neutral-700 dark:bg-black md:grid-cols-[repeat(2,auto)_1fr_auto]">
+        <header className="sticky top-0 z-20 grid min-w-0 grid-rows-[repeat(3,auto)] items-center gap-2 border-b bg-white px-4 py-2 dark:border-neutral-700 dark:bg-black md:grid-cols-[repeat(2,auto)_1fr_auto]">
           <Link href="..">
             <IconHoverEffect>
               <VscArrowLeft className="h-6 w-6 dark:fill-white" />
             </IconHoverEffect>
           </Link>
-          <ProfileImage src={profile.data?.image} className="flex-shrink-0" />
+          <ProfileImage src={profile.data?.image} className="flex-shrink-0 h-24 w-24" />
           <div className="min-w-0">
             <h1 className="min-w-0 break-words text-lg font-semibold dark:text-white">
               {profile.data?.name}

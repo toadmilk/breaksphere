@@ -3,7 +3,7 @@ import { FaGithub } from "react-icons/fa";
 
 export function Info() {
   return (
-    <div>
+    <div className="w-[350px] pt-4">
       <Link
         href="https://github.com/toadmilk/breaksphere"
         className="flex justify-center items-center min-h-0"

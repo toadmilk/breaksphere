@@ -57,6 +57,7 @@ export const profileRouter = createTRPCRouter({
 
         void ctx.revalidateSSG?.(`/profiles/${userId}`);
         void ctx.revalidateSSG?.(`/profiles/${currentUserId}`);
+        void ctx.revalidateSSG?.(`/`);
         return { addedFollow };
     }),
     getFollowers: publicProcedure.input(z.object({ id: z.string(), title: z.string() }))
@@ -108,7 +109,7 @@ export const profileRouter = createTRPCRouter({
           data: { name, bio, location, website },
         });
         void ctx.revalidateSSG?.(`/profiles/${currentUserId}`);
+        void ctx.revalidateSSG?.(`/`);
         return user;
-
     }),
 })

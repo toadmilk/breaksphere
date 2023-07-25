@@ -67,9 +67,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
           <div className="min-h-screen min-w-0 flex-grow border-x dark:border-neutral-700">
             <Component {...pageProps} theme={theme} toggleTheme={toggleTheme} />
           </div>
-          <div className="max-w-auto">
+          <div className="max-w-auto min-h-0 max-h-auto">
             <FollowBar id={session?.user?.id ?? ""} title="Who to follow" />
-            {/*<Info /> TODO: re-enable when can figure out css*/}
+            <Info />
           </div>
         </div>
       </div>
