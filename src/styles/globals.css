@@ -9,3 +9,12 @@
 body * {
     @apply transition-colors duration-100;
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  width: 0;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

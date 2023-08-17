@@ -51,6 +51,7 @@ export function InfinitePostList({
                 next={fetchNewPosts}
                 hasMore={hasMore}
                 loader={<LoadingSpinner />}
+                className="hide-scrollbar"
                 >
                 {posts.map((post) => {
                     return <PostCard key={post.id} {...post} />;

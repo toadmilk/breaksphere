@@ -85,7 +85,7 @@ function Form() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2 border-b dark:border-neutral-700 px-4 py-2">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2 border-b dark:border-neutral-700 px-4 py-3">
             <div className="flex gap-4">
                 <ProfileImage src={session.data.user.image} />
                 <textarea

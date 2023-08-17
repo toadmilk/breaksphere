@@ -55,7 +55,7 @@ export function HeartButton({
           <LikedByModal isOpen={isLikesModalOpen} onClose={closeLikesModal} id={id} />
         </Suspense>
       )}
-      <div className={`group -ml-2 items-center gap-1 self-start flex transition-colors duration-200 ${
+      <div className={`group -ml-2 items-center gap-1 self-start flex transition-colors duration-0   ${
         likedByMe
           ? "text-red-500"
           : "text-neutral-500 hover:text-red-500 focus-visible:text-red-500"
@@ -64,8 +64,8 @@ export function HeartButton({
           disabled={isLoading}
           onClick={onClick}
         >
-          <IconHoverEffect red>
-            <HeartIcon className={`w-5 h-5 transition-colors duration-200 ${
+          <IconHoverEffect>
+            <HeartIcon className={`w-5 h-5 transition-colors duration-0 ${
               likedByMe
                 ? "fill-red-500"
                 : "fill-neutral-500 group-hover:fill-red-500 group-focus-visible:fill-red-500"
@@ -98,7 +98,7 @@ export function DeleteButton({
 
   return (
     <button onClick={onClick} className="ml-3">
-      <IconHoverEffect red>
+      <IconHoverEffect>
         <BsTrashFill className="self-center w-5 h-5 transition-colors duration-100 fill-neutral-500 hover:fill-red-500 focus-visible:fill-red-500" />
       </IconHoverEffect>
     </button>
