@@ -16,7 +16,7 @@ export function Button({
 }: ButtonProps) {
     const sizeClasses = small ? "px-2 py-1": "px-4 py-2 font-bold";
     let colorClasses = gray
-      ? "bg-neutral-400 hover:bg-neutral-300 focus-visible:bg-neutral-300"
+      ? "bg-neutral-500 hover:bg-neutral-400 focus-visible:bg-neutral-400"
       : "bg-indigo-600 hover:bg-indigo-500 focus-visible:bg-indigo-500";
 
     if (red) {

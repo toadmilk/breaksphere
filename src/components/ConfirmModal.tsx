@@ -16,7 +16,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({ isOpen, content, onC
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="modal__overlay dark:bg-black opacity-50" onClick={onCancel} />
-      <div className="max-w-md bg-neutral-100 border-b border-red-500 dark:bg-neutral-800 rounded-lg shadow-xl w-full">
+      <div className="max-w-md bg-neutral-100 dark:bg-neutral-900 rounded-lg shadow-xl w-full">
         <div className="px-6 py-4">
           <h3 className="text-xl font-semibold dark:text-white">Confirm Deletion</h3>
           <p className="text-gray-700 dark:text-gray-300">{content}</p>

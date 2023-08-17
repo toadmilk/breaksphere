@@ -105,8 +105,8 @@ export const EditProfileModal: React.FC<ModalProps> = ({ title, isOpen, onClose,
 
   return isOpen ? (
     <div className={'fixed inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-50 dark:text-white py-2'}>
-      <div ref={outsideRef} className={'modal__overlay'} onClick={handleCloseOnOverlay} />
-      <div className="max-w-md bg-white dark:bg-neutral-900 rounded-lg shadow-xl w-full h-[700px] overflow-y-auto">
+      <div ref={outsideRef} className="fixed inset-0 z-40" onClick={handleCloseOnOverlay} />
+      <div className="max-w-md bg-white dark:bg-neutral-900 rounded-lg shadow-xl w-full h-[700px] overflow-y-auto hide-scrollbar">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between p-4 border-b">
             <h3 className="text-xl font-semibold dark:text-white">{title}</h3>
