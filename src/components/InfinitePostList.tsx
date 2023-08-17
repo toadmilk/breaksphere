@@ -164,33 +164,34 @@ function PostCard({
 
     // <Link href={`/posts/${id}`}>
     return (
-          <li className="flex gap-4 border-b dark:border-neutral-700 px-4 py-4">
-          <ConfirmModal
-            isOpen={isDeleteModalOpen}
-            content="Are you sure you want to delete this post?"
-            onCancel={closeDeleteModal}
-            onConfirm={handleDeletePost}
-          />
-          <Link href={`/profiles/${user.id}`}>
-              <ProfileImage src={user.image} />
-          </Link>
+        <li className="flex gap-4 border-b dark:border-neutral-700 px-4 py-4 relative">
+            <ConfirmModal
+                isOpen={isDeleteModalOpen}
+                content="Are you sure you want to delete this post?"
+                onCancel={closeDeleteModal}
+                onConfirm={handleDeletePost}
+            />
+            <Link href={`/posts/${id}`} className="inset-0"/>
+            <a href={`/profiles/${user.id}`} className="z-1">
+                <ProfileImage src={user.image} />
+            </a>
             <div className="flex min-w-0 flex-grow flex-col">
-              <div className="flex min-w-0 break-words gap-1">
-                  <Link
-                    href={`/profiles/${user.id}`}
-                    className="font-bold min-w-0 break-words hover:underline focus-visible:underline dark:text-white"
-                  >
-                      <p className="truncate">{user.name}</p>
-                  </Link>
-                  <span className="text-neutral-500">{dateTimeFormatter.format(createdAt)}</span>
-              </div>
-              <p className="min-w-0 break-words py-1 dark:text-white">{content}</p>
-              <div className="flex">
-                  <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount} id={id} />
-                  <DeleteButton onClick={openDeleteModal} postOwnerId={user.id} />
-                  {/*<ShareButton postId={id}/> TODO: Reenable*/}
-              </div>
-          </div>
+                <div className="flex min-w-0 break-words gap-1">
+                    <a
+                        href={`/profiles/${user.id}`}
+                        className="font-bold min-w-0 break-words z-1 hover:underline focus-visible:underline dark:text-white"
+                    >
+                        <p className="truncate">{user.name}</p>
+                    </a>
+                    <span className="text-neutral-500">{dateTimeFormatter.format(createdAt)}</span>
+                </div>
+                <p className="min-w-0 break-words py-1 dark:text-white">{content}</p>
+                <div className="flex z-1">
+                    <HeartButton onClick={handleToggleLike} isLoading={toggleLike.isLoading} likedByMe={likedByMe} likeCount={likeCount} id={id} />
+                    <DeleteButton onClick={openDeleteModal} postOwnerId={user.id} />
+                    {/*<ShareButton postId={id}/> TODO: Reenable*/}
+                </div>
+            </div>
         </li>
     );
 }

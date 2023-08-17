@@ -99,7 +99,7 @@ export function DeleteButton({
   return (
     <button onClick={onClick} className="ml-3">
       <IconHoverEffect>
-        <BsTrashFill className="self-center w-5 h-5 transition-colors duration-100 fill-neutral-500 hover:fill-red-500 focus-visible:fill-red-500" />
+        <BsTrashFill className="self-center w-5 h-5 transition-colors duration-0 fill-neutral-500 hover:fill-red-500 focus-visible:fill-red-500" />
       </IconHoverEffect>
     </button>
   )
