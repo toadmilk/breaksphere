@@ -22,14 +22,15 @@ const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
   const { data: post } = api.post.getById.useQuery({ id });
 
   const toggleLike = api.post.toggleLike.useMutation({
-    onSuccess: (data, postId) => {
-      const { addedLike } = data;
-      if (addedLike) {
-        toast.success('Like added! 🥺');
-      } else {
-        toast.success('Like removed! 😢');
-      }
-    },
+    // Seems kinda annoying to show a toast for every like
+    // onSuccess: (data, postId) => {
+    //   const { addedLike } = data;
+    //   if (addedLike) {
+    //     toast.success('Like added! 🥺');
+    //   } else {
+    //     toast.success('Like removed! 😢');
+    //   }
+    // },
     onError: (error) => {
       toast.error(error.message + ' 💀');
     },
