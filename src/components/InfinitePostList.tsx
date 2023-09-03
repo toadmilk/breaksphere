@@ -100,11 +100,12 @@ function PostCard({
                 })
             }
         }
-            if (addedLike) {
-                toast.success('Like added! 🥺');
-            } else {
-                toast.success('Like removed! 😢');
-            }
+            // Seems annoying to show a toast for every like
+            // if (addedLike) {
+            //     toast.success('Like added! 🥺');
+            // } else {
+            //     toast.success('Like removed! 😢');
+            // }
             trpcUtils.post.infiniteFeed.setInfiniteData({}, updateData);
             trpcUtils.post.infiniteFeed.setInfiniteData({ onlyFollowing: true }, updateData);
             trpcUtils.post.infiniteProfileFeed.setInfiniteData({ userId: user.id }, updateData);

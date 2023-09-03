@@ -42,9 +42,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
-    toast.info(
-      `Switched to ${newTheme} mode! ${newTheme === "dark" ? "🌙" : "☀️"}`
-    );
+    // Annoying for this to show up every time
+    // toast.info(
+    //   `Switched to ${newTheme} mode! ${newTheme === "dark" ? "🌙" : "☀️"}`
+    // );
   };
 
   return (
