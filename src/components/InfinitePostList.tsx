@@ -100,12 +100,6 @@ function PostCard({
                 })
             }
         }
-            // Seems annoying to show a toast for every like
-            // if (addedLike) {
-            //     toast.success('Like added! 🥺');
-            // } else {
-            //     toast.success('Like removed! 😢');
-            // }
             trpcUtils.post.infiniteFeed.setInfiniteData({}, updateData);
             trpcUtils.post.infiniteFeed.setInfiniteData({ onlyFollowing: true }, updateData);
             trpcUtils.post.infiniteProfileFeed.setInfiniteData({ userId: user.id }, updateData);
@@ -163,7 +157,7 @@ function PostCard({
         deletePost.mutate({id});
     }
 
-    // <Link href={`/posts/${id}`}>
+    // href={`/posts/${id}`}
     return (
         <li className="flex gap-4 border-b dark:border-neutral-700 px-4 py-4 relative">
             <ConfirmModal
@@ -172,7 +166,6 @@ function PostCard({
                 onCancel={closeDeleteModal}
                 onConfirm={handleDeletePost}
             />
-            <Link href={`/posts/${id}`} className="inset-0"/>
             <a href={`/profiles/${user.id}`} className="z-1">
                 <ProfileImage src={user.image} />
             </a>
