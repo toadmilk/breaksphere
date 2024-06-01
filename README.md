@@ -28,3 +28,15 @@ Please note that additional authentication options may be added in the future ba
 ## Organizing with Trello
 
 In developing BreakSphere, Trello was a vital tool. My Trello board, accessible [here](https://trello.com/b/Mt7Uddx4/breaksphere), is divided into sections: 'Bugs', 'To Do', 'Maybe', 'Doing', and 'Done'. This categorization streamlined my workflow, enabling efficient task tracking and prioritization.
+
+# Media
+
+![Main Page](public/images/main_page.png)
+
+![Logged in users profile](public/images/my_profile.png)
+
+![Edit profile 1](public/images/edit_profile_1.png)
+
+![Edit profile 2](public/images/edit_profile_2.png)
+
+![Another users profile](public/images/another_profile.png)
