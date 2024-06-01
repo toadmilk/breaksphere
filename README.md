@@ -31,12 +31,19 @@ In developing BreakSphere, Trello was a vital tool. My Trello board, accessible 
 
 # Media
 
-![Main Page](public/images/main_page.png)
+## Home Page
 
-![Logged in users profile](public/images/my_profile.png)
+![Home Page](public/images/main_page.png)
+
+## Personal Profile
+
+![Personal Profile](public/images/my_profile.png)
+
+## Editing User Profile
 
 ![Edit profile 1](public/images/edit_profile_1.png)
-
 ![Edit profile 2](public/images/edit_profile_2.png)
 
-![Another users profile](public/images/another_profile.png)
+## Viewing Another Profile
+
+![Viewing Another Profile](public/images/another_profile.png)
