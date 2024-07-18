@@ -1,10 +1,12 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next-legacy";
 
-import { utapi } from "uploadthing/server";
+import { UTApi } from "uploadthing/server";
 import { getServerAuthSession } from "~/server/auth";
 import { prisma } from "~/server/db";
 
 const f = createUploadthing();
+
+export const utapi = new UTApi();
 
 export const ourFileRouter = {
   profilePicture: f({ image: { maxFileSize: "16MB" } })
@@ -49,7 +51,7 @@ export const ourFileRouter = {
         console.log("User updated:", user);
 
         if (oldImageName) {
-          await utapi.deleteFiles(decodeURIComponent(oldImageName))
+          await utapi.deleteFiles(oldImageName)
         }
 
       } catch (error) {
